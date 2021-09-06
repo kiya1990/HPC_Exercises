@@ -1,0 +1,64 @@
+%%writefile S_exercise.c
+
+
+/******************************************************************************
+* FILE: S_exercise.c
+* DESCRIPTION:  
+*   Sequential Example - Matrix Multiply and sum - C version
+* AUTHOR: Khodayar Taghiniyarami
+* LAST REVISED: 14/06/1400
+******************************************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define NRA 2000                 /* number of rows in matrix A */
+#define NCA 2000                 /* number of columns in matrix A */
+#define NCB 2000                 /* number of columns in matrix B */
+
+int main () 
+{
+  int i, j, k;
+
+  double *a,*b;
+  double t1,t2,sum;	
+  time_t wt1,wt2;
+
+  a=(double *)malloc(NRA*NCA*sizeof(double)); /* matrix A to be multiplied */
+  b=(double *)malloc(NCA*NCB*sizeof(double)); /* matrix B to be multiplied */
+  sum = 0.0 ;
+  
+
+  t1=(double)clock()/(double)CLOCKS_PER_SEC;
+  time(&wt1);
+
+  
+
+  
+ 
+	
+  /*** Initialize matrices ***/
+ 
+  for (i=0; i<NRA; i++)
+    for (j=0; j<NCA; j++)
+      a[j+NCA*i]= i+j;
+
+  for (i=0; i<NCA; i++)
+    for (j=0; j<NCB; j++)
+      b[j+NCB*i]= i*j;
+
+
+ 
+
+
+  for (i=0; i<NRA; i++){
+    for(j=0; j<NCB; j++)       
+        sum = sum + (a[j+NCA*i] * b[j+NCB*i]);
+  }
+  
+
+time(&wt2); 
+   printf("Computation WallClockTime %2.0fs\n",difftime(wt2,wt1));
+
+printf("  sum=%f\n", sum);
+}
